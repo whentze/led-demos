@@ -134,7 +134,7 @@ void DrawOnCanvas(Canvas *canvas) {
       }
     }
 
-    while(getchar_unlocked() != EOF){
+    while(getchar() != EOF){
       puts("derp");
     }
 
