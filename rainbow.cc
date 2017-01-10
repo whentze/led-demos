@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-#include <vector>
+#include <thread>
 
 using rgb_matrix::GPIO;
 using rgb_matrix::RGBMatrix;
@@ -15,15 +15,15 @@ using namespace std;
 
 #define COLORS 2
 
-unsigned NUM    = 1000;
-unsigned SPEED  = 0.4;
-unsigned OFFSET = 0.2;
-unsigned ACCEL  = 0.9995;
-unsigned TURNSPEED = 0.3;
-unsigned GSPEED = 0.0003;
-unsigned SPOKES = 4;
-unsigned PULSELEN = 1;
-unsigned DECAY = 0.95;
+int NUM    = 1000;
+int SPEED  = 0.4;
+int OFFSET = 0.2;
+int ACCEL  = 0.9995;
+int TURNSPEED = 0.3;
+int GSPEED = 0.0003;
+int SPOKES = 4;
+int PULSELEN = 1;
+int DECAY = 0.95;
 
 #define WIDTH  6
 #define HEIGHT 1
@@ -134,13 +134,24 @@ void DrawOnCanvas(Canvas *canvas) {
       }
     }
 
-    while(getchar() != EOF){
-      puts("derp");
-    }
-
     DrawFull(canvas);
 
     usleep(5000);
+  }
+}
+
+void handleKeyboard(void) {
+  while(1){
+    switch(getchar()){
+      case '-':
+        SPOKES = max(1, SPOKES - 1);
+        break;
+      case '+':
+        SPOKES = min(10, SPOKES + 1);
+        break;
+      default:
+        break;
+    }
   }
 }
 
@@ -170,7 +181,9 @@ int main(int argc, char *argv[]) {
   Canvas *canvas = new RGBMatrix(&io, rows, chain, parallel);
 
   initcolors();
-  DrawOnCanvas(canvas);    // Using the canvas.
+  
+  thread drawer(DrawOnCanvas, canvas);
+  thread keyboardHandler(handleKeyboard);
 
   // Animation finished. Shut down the RGB matrix.
   canvas->Clear();
