@@ -142,16 +142,17 @@ void DrawOnCanvas(Canvas *canvas) {
 
 void handleKeyboard(void) {
   while(1){
+    puts("keyboard"\n);
     switch(getchar()){
       case '-':
         SPOKES = max(1, SPOKES - 1);
-        puts("foo");
+        puts("foo\n");
         break;
       case '+':
         SPOKES = min(10, SPOKES + 1);
         break;
       default:
-        puts("bar");
+        puts("bar\n");
         break;
     }
   }
