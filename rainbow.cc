@@ -67,7 +67,7 @@ static void DrawFull(Canvas *canvas){
   for(int x = 0; x < WIDTH*32; x++) {
     for(int y = 0; y < HEIGHT*32; y++) {
       if(inImage(x, y)){
-        canvas->SetPixel(x, y, leds[x][y][0]/2 + 128, leds[x][y][1]/2 + 128, leds[x][y][2]/2 + 128);
+        canvas->SetPixel(x, y, 1, 1, 1);
       } else {
         canvas->SetPixel(x, y, leds[x][y][0], leds[x][y][1], leds[x][y][2]);
       }
