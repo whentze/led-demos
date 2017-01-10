@@ -13,16 +13,17 @@ using rgb_matrix::RGBMatrix;
 using rgb_matrix::Canvas;
 using namespace std;
 
-#define COLORS     2
-#define NUM        1000
-#define SPEED      0.4
-#define OFFSET     0.2
-#define ACCEL      0.9995
-#define TURNSPEED  0.3
-#define GSPEED     0.0003
-#define SPOKES     5
-#define PULSELEN   1
-#define DECAY      0.95
+#define COLORS 2
+
+unsigned NUM    = 1000;
+unsigned SPEED  = 0.4;
+unsigned OFFSET = 0.2;
+unsigned ACCEL  = 0.9995;
+unsigned TURNSPEED = 0.3;
+unsigned GSPEED = 0.0003;
+unsigned SPOKES = 4;
+unsigned PULSELEN = 1;
+unsigned DECAY = 0.95;
 
 #define WIDTH  6
 #define HEIGHT 1
@@ -133,6 +134,9 @@ void DrawOnCanvas(Canvas *canvas) {
       }
     }
 
+    while(getchar_unlocked() != EOF){
+      puts("derp");
+    }
 
     DrawFull(canvas);
 
