@@ -48,9 +48,9 @@ void initcolors();
 
 const unsigned part_width = 5;
 const unsigned part_height= 4;
-const unsigned part_x = 144;
+const unsigned part_x = 158;
 const unsigned part_y = 4;
-const unsigned part_scale = 8;
+const unsigned part_scale = 6;
 
 bool image_partial[part_height][part_width] = {
 {0,0,0,0,0},
