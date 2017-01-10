@@ -145,6 +145,7 @@ void handleKeyboard(void) {
     switch(getchar()){
       case '-':
         SPOKES = max(1, SPOKES - 1);
+        puts("foo");
         break;
       case '+':
         SPOKES = min(10, SPOKES + 1);
