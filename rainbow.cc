@@ -140,19 +140,16 @@ void DrawOnCanvas(Canvas *canvas) {
   }
 }
 
-void handleKeyboard(FILE *fd) {
+void handleKeyboard() {
   while(1){
-    puts("keyboard\n");
-    switch(getc_unlocked(fd)){
+    switch(getchar_unlocked()){
       case '-':
         SPOKES = max(1, SPOKES - 1);
-        puts("foo\n");
         break;
       case '+':
         SPOKES = min(10, SPOKES + 1);
         break;
       default:
-        puts("bar\n");
         break;
     }
   }
@@ -174,7 +171,7 @@ int main(int argc, char *argv[]) {
   GPIO io;
   if (!io.Init())
     return 1;
-
+  
   /*
    * Set up the RGBMatrix. It implements a 'Canvas' interface.
    */
@@ -185,9 +182,10 @@ int main(int argc, char *argv[]) {
 
   initcolors();
   thread drawer(DrawOnCanvas, canvas);    // Using the canvas.
-  thread keyboardHandler(handleKeyboard, stdin);
+  thread keyboardHandler(handleKeyboard);
 
-  drawer.join();
+  keyboardHandler.join();
+  
   // Animation finished. Shut down the RGB matrix.
   canvas->Clear();
   delete canvas;
