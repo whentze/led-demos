@@ -151,6 +151,7 @@ void handleKeyboard(void) {
         SPOKES = min(10, SPOKES + 1);
         break;
       default:
+        puts("bar");
         break;
     }
   }
