@@ -50,7 +50,7 @@ const unsigned part_width = 5;
 const unsigned part_height= 4;
 unsigned part_x = 158;
 unsigned part_y = 4;
-const unsigned part_scale = 6;
+const unsigned part_scale = 2;
 
 bool image_partial[part_height][part_width] = {
 {0,0,0,0,0},
@@ -95,7 +95,6 @@ void DrawOnCanvas(Canvas *canvas) {
     gshift = fmod(gshift + GSPEED, 2*M_PI);
     pulse = (pulse + 1) % PULSELEN;
     initcolors();
-    part_x = (unsigned)(80+76*sin(gshift));
     for(int i = 0; i < NUM; i++) {
       star* s = &(stars[i]);
       if(!s->held) {
@@ -116,9 +115,13 @@ void DrawOnCanvas(Canvas *canvas) {
         if(!pulse){
           double dir = (double)rand();
           int col = (int)(fmod(SPOKES * dir + gturn, 2*M_PI)/(2*M_PI) * (COLORS));
+          double spawn_x = 48*sin(3*gshift)*sin(11*gshift);
+          double spawn_y = 12*cos(7*gshift);
+          part_x = max(0, min(WIDTH *32, (int)(spawn_x - part_width *part_scale/2)));
+          part_y = max(0, min(HEIGHT*32, (int)(spawn_y - part_height*part_scale/2)));
           stars[i] = {
-            48*sin(3*gshift)*sin(11*gshift),
-            12*cos(7*gshift),
+            spawn_x,
+            spawn_y,
             (sin(dir) + 0.05*(7*sin(14*gshift) - 4*sin(8*gshift))) * SPEED,
             (cos(dir) - 0.05*(7/4*sin(7*gshift))) * SPEED,
             (int)hues[col][0],
