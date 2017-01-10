@@ -95,7 +95,7 @@ void DrawOnCanvas(Canvas *canvas) {
     gshift = fmod(gshift + GSPEED, 2*M_PI);
     pulse = (pulse + 1) % PULSELEN;
     initcolors();
-    part_x = (unsigned)(80+76*sin(gshift/100.0));
+    part_x = (unsigned)(80+76*sin(gshift));
     for(int i = 0; i < NUM; i++) {
       star* s = &(stars[i]);
       if(!s->held) {
