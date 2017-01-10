@@ -65,8 +65,8 @@ static bool inImage(int x, int y){
 static void DrawFull(Canvas *canvas){
   for(int x = 0; x < WIDTH*32; x++) {
     for(int y = 0; y < HEIGHT*32; y++) {
-      if(x < part_x or x > part_x + part_scale*part_width
-      or y < part_y or y > part_y + part_scale*part_height){
+      if(x < part_x or x >= part_x + part_scale*part_width
+      or y < part_y or y >= part_y + part_scale*part_height){
         canvas->SetPixel(x, y, leds[x][y][0], leds[x][y][1], leds[x][y][2]);
       } else {
         if(inImage(x-part_x, y-part_y)){
