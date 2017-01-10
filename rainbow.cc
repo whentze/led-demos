@@ -55,8 +55,8 @@ const unsigned part_scale = 3;
 
 bool image_partial[part_height][part_width] = {
 {0,0,0,0,0},
-{0,0,0,1,0},
-{1,1,1,0,1},
+{0,1,0,0,0},
+{1,0,1,1,1},
 {1,1,1,1,1}};
 
 static bool inImage(int x, int y){
