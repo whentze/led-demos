@@ -46,13 +46,24 @@ typedef struct {
 
 void initcolors();
 
+const unsigned part_width = 6;
+const unsigned part_height= 4;
+
+bool image_partial[part_height][part_width] = {
+{ 1, 0, 1, 0, 1, 0 },
+{ 0, 1, 0, 1, 0, 1 },
+{ 1, 0, 1, 0, 1, 0 },
+{ 0, 1, 0, 1, 0, 1 }};
+
 static void DrawFull(Canvas *canvas){
   for(int x = 0; x < WIDTH*32; x++) {
     for(int y = 0; y < HEIGHT*32; y++) {
       canvas->SetPixel(x, y, leds[x][y][0], leds[x][y][1], leds[x][y][2]);
-      leds[x][y][0] *= DECAY;
-      leds[x][y][1] *= DECAY;
-      leds[x][y][2] *= DECAY;
+      if(image_partial[y%part_height][x%part_width]){
+        leds[x][y][0] *= DECAY;
+        leds[x][y][1] *= DECAY;
+        leds[x][y][2] *= DECAY;
+      }
     }
   }
 }
