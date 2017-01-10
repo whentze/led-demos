@@ -33,7 +33,7 @@ static float absin(float x) {
 }
 
 static float abcos(float x) {
-  return absin(x + 1.5707963);
+  return absin(x + M_PI/2);
 }
 
 static void DrawFull(Canvas *canvas){
@@ -48,7 +48,7 @@ static void DrawOnCanvas(Canvas *canvas) {
   float t = 0;
 
   while(1){
-    for(float p = 0; p < 6.2831853; p += 0.001) {
+    for(float p = 0; p < 2*M_PI; p += 0.001) {
       int r = min(0, (int)(64*absin(5*p+t*21)));
       int g = min(0, (int)(64*absin(5*p+t*31)));
       int b = min(0, (int)(64*absin(5*p+t*50)));
@@ -70,7 +70,7 @@ static void DrawOnCanvas(Canvas *canvas) {
 
     }
 
-    t = fmod(t + 0.0001, 6.2831853);
+    t = fmod(t + 0.0001, M_PI*2);
     usleep(20000);
     DrawFull(canvas);
 
