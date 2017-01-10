@@ -46,14 +46,18 @@ typedef struct {
 
 void initcolors();
 
-const unsigned part_width = 6;
-const unsigned part_height= 4;
+const unsigned part_width = 10;
+const unsigned part_height= 8;
 
 bool image_partial[part_height][part_width] = {
-{ 1, 0, 1, 0, 1, 0 },
-{ 0, 1, 0, 1, 0, 1 },
-{ 1, 0, 1, 0, 1, 0 },
-{ 0, 1, 0, 1, 0, 1 }};
+{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+{ 1, 1, 1, 1, 1, 1, 0, 0, 1, 1 },
+{ 1, 1, 1, 1, 1, 1, 0, 0, 1, 1 },
+{ 0, 0, 0, 0, 0, 0, 1, 1, 0, 0 },
+{ 0, 0, 0, 0, 0, 0, 1, 1, 0, 0 },
+{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }};
 
 static void DrawFull(Canvas *canvas){
   for(int x = 0; x < WIDTH*32; x++) {
