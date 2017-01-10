@@ -117,8 +117,8 @@ void DrawOnCanvas(Canvas *canvas) {
           int col = (int)(fmod(SPOKES * dir + gturn, 2*M_PI)/(2*M_PI) * (COLORS));
           double spawn_x = 48*sin(3*gshift)*sin(11*gshift);
           double spawn_y = 12*cos(7*gshift);
-          part_x = max(0, min(WIDTH *32, (int)spawn_x));
-          part_y = max(0, min(HEIGHT*32, (int)spawn_y));
+          part_x = WIDTH *32/2 +max(0, min(WIDTH *32, (int)(spawn_x - part_width *part_scale/2)));
+          part_y = HEIGHT*32/2 +max(0, min(HEIGHT*32, (int)(spawn_y - part_height*part_scale/2)));
           stars[i] = {
             spawn_x,
             spawn_y,
