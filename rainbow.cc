@@ -66,7 +66,11 @@ static bool inImage(int x, int y, unsigned scale = 4){
 static void DrawFull(Canvas *canvas){
   for(int x = 0; x < WIDTH*32; x++) {
     for(int y = 0; y < HEIGHT*32; y++) {
-      canvas->SetPixel(x, y, leds[x][y][0], leds[x][y][1], leds[x][y][2]);
+      if(inImage(x, y)){
+        canvas->SetPixel(x, y, leds[x][y][0], leds[x][y][1], leds[x][y][2]);
+      } else {
+        canvas->SetPixel(x, y, ~leds[x][y][0], ~leds[x][y][1], ~leds[x][y][2]);
+      }
       leds[x][y][0] *= DECAY;
       leds[x][y][1] *= DECAY;
       leds[x][y][2] *= DECAY;
@@ -97,15 +101,9 @@ void DrawOnCanvas(Canvas *canvas) {
         int ix = (int)(s->x + WIDTH*16 - 1);
         int iy = (int)(s->y + HEIGHT*16 - 1);
         if(0<=ix &&ix< WIDTH*32 && 0 <= iy && iy < HEIGHT*32 && fabs(s->xs)+fabs(s->ys) >= 0.002) {
-          if(inImage(ix, iy)){
-            leds[ix][iy][0] = min(255, leds[ix][iy][0] + s->r);
-            leds[ix][iy][1] = min(255, leds[ix][iy][1] + s->g);
-            leds[ix][iy][2] = min(255, leds[ix][iy][2] + s->b);
-          } else {
-            leds[ix][iy][0] = min(255, leds[ix][iy][0] + s->g);
-            leds[ix][iy][1] = min(255, leds[ix][iy][1] + s->r);
-            leds[ix][iy][2] = min(255, leds[ix][iy][2] + s->b);
-          }
+          leds[ix][iy][0] = min(255, leds[ix][iy][0] + s->r);
+          leds[ix][iy][1] = min(255, leds[ix][iy][1] + s->g);
+          leds[ix][iy][2] = min(255, leds[ix][iy][2] + s->b);
         } else {
           s->held = true;
         }
