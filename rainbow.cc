@@ -182,7 +182,7 @@ int main(int argc, char *argv[]) {
 
   initcolors();
   
-  thread drawer(DrawOnCanvas, canvas);
+  DrawOnCanvas(canvas);
   //thread keyboardHandler(handleKeyboard);
 
   // Animation finished. Shut down the RGB matrix.
