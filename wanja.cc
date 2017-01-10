@@ -25,11 +25,11 @@ using namespace std;
 static int leds[WIDTH*32][HEIGHT*32][3];
 
 static float absin(float x) {
-  float xx = fmod(x, 6.2831853);
-  if (xx < 3.1415927) {
-    return 1 - 2*fabs(xx/3.1415927 - 0.5);
+  x = fmod(x, 2*M_PI);
+  if (x < M_PI) {
+    return 1 - 2*fabs(x/M_PI - 0.5);
   }
-  return 2*fabs(xx/3.1415927 - 1.5) - 1;
+  return 2*fabs(x/M_PI - 1.5) - 1;
 }
 
 static float abcos(float x) {
@@ -45,17 +45,16 @@ static void DrawFull(Canvas *canvas){
 }
 
 static void DrawOnCanvas(Canvas *canvas) {
-  float s = 0;
-  float p = 0;
+  float t = 0;
 
   while(1){
-    for(p = 0; p < 6.2831853; p += 0.001) {
-      int r = min(0, (int)(64*absin(5*p+s*21)));
-      int g = min(0, (int)(64*absin(5*p+s*31)));
-      int b = min(0, (int)(64*absin(5*p+s*50)));
+    for(float p = 0; p < 6.2831853; p += 0.001) {
+      int r = min(0, (int)(64*absin(5*p+t*21)));
+      int g = min(0, (int)(64*absin(5*p+t*31)));
+      int b = min(0, (int)(64*absin(5*p+t*50)));
 
-      float fx = WIDTH*16 + sin(p*1) * sin(151* s + 7* p + 98* s + 5 * cos(p+s))          * WIDTH *16;
-      float fy = HEIGHT*16 + cos(p*3) * cos(1651*s + 27*p + 176*s + 7 * sin(p-s))         * HEIGHT*16;
+      float fx = WIDTH*16  + sin(p*1) * sin( 151*t +  7*p +  98*t + 5 * cos(p+t))  * WIDTH *16;
+      float fy = HEIGHT*16 + cos(p*3) * cos(1651*t + 27*p + 176*t + 7 * sin(p-t))  * HEIGHT*16;
 
       int x = max(0, min(WIDTH*32  - 1, int(fx)));
       int y = max(0, min(HEIGHT*32 - 1, int(fy)));
@@ -71,7 +70,7 @@ static void DrawOnCanvas(Canvas *canvas) {
 
     }
 
-    s = fmod(s + 0.0001, 6.2831853);
+    t = fmod(t + 0.0001, 6.2831853);
     usleep(20000);
     DrawFull(canvas);
 
