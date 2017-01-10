@@ -15,15 +15,15 @@ using namespace std;
 
 #define COLORS 2
 
-int NUM    = 1000;
-int SPEED  = 0.4;
-int OFFSET = 0.2;
-int ACCEL  = 0.9995;
-int TURNSPEED = 0.3;
-int GSPEED = 0.0003;
-int SPOKES = 4;
-int PULSELEN = 1;
-int DECAY = 0.95;
+int    NUM    = 1000;
+double SPEED  = 0.4;
+double OFFSET = 0.2;
+double ACCEL  = 0.9995;
+double TURNSPEED = 0.3;
+double GSPEED = 0.0003;
+int    SPOKES = 4;
+int    PULSELEN  = 1;
+double DECAY  = 0.95;
 
 #define WIDTH  6
 #define HEIGHT 1
