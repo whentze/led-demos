@@ -48,15 +48,15 @@ void initcolors();
 
 const unsigned part_width = 5;
 const unsigned part_height= 4;
-const unsigned part_x = 8;
-const unsigned part_y = 8;
+const unsigned part_x = 144;
+const unsigned part_y = 4;
 const unsigned part_scale = 8;
 
 bool image_partial[part_height][part_width] = {
-{1,1,1,1,1},
-{1,1,1,0,1},
+{0,0,0,0,0},
 {0,0,0,1,0},
-{0,0,0,0,0}};
+{1,1,1,0,1},
+{1,1,1,1,1}};
 
 static bool inImage(int x, int y){
   return image_partial[y/part_scale%part_height][x/part_scale%part_width];
