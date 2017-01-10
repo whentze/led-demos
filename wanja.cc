@@ -24,10 +24,6 @@ using namespace std;
 
 static int leds[WIDTH*32][HEIGHT*32][3];
 
-static float fabs(float x) {
-  return (x >= 0) ? x : -x;
-}
-
 static float absin(float x) {
   float xx = fmod(x, 6.2831853);
   if (xx < 3.1415927) {
