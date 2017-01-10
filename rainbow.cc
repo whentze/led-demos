@@ -50,7 +50,7 @@ const unsigned part_width = 5;
 const unsigned part_height= 4;
 unsigned part_x = 158;
 unsigned part_y = 4;
-const unsigned part_scale = 2;
+const unsigned part_scale = 4;
 
 bool image_partial[part_height][part_width] = {
 {0,0,0,0,0},
