@@ -181,8 +181,10 @@ int main(int argc, char *argv[]) {
   Canvas *canvas = new RGBMatrix(&io, rows, chain, parallel);
 
   initcolors();
+  thread drawer(DrawOnCanvas, canvas);    // Using the canvas.
   
-  DrawOnCanvas(canvas);
+  drawer.join();
+
   //thread keyboardHandler(handleKeyboard);
 
   // Animation finished. Shut down the RGB matrix.
