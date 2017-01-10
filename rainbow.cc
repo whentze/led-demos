@@ -143,7 +143,7 @@ void DrawOnCanvas(Canvas *canvas) {
 void handleKeyboard(FILE *fd) {
   while(1){
     puts("keyboard\n");
-    switch(getc(fd)){
+    switch(getc_unlocked(fd)){
       case '-':
         SPOKES = max(1, SPOKES - 1);
         puts("foo\n");
