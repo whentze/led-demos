@@ -46,30 +46,34 @@ typedef struct {
 
 void initcolors();
 
-const unsigned part_width = 10;
-const unsigned part_height= 8;
+const unsigned part_width = 5;
+const unsigned part_height= 4;
+const unsigned part_x = 8;
+const unsigned part_y = 8;
+const unsigned part_scale = 8;
 
 bool image_partial[part_height][part_width] = {
-{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-{ 1, 1, 1, 1, 1, 1, 0, 0, 1, 1 },
-{ 1, 1, 1, 1, 1, 1, 0, 0, 1, 1 },
-{ 0, 0, 0, 0, 0, 0, 1, 1, 0, 0 },
-{ 0, 0, 0, 0, 0, 0, 1, 1, 0, 0 },
-{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }};
+{1,1,1,1,1},
+{1,1,1,0,1},
+{0,0,0,1,0},
+{0,0,0,0,0}};
 
-static bool inImage(int x, int y, unsigned scale = 4){
-  return image_partial[y/scale%part_height][x/scale%part_width];
+static bool inImage(int x, int y){
+  return image_partial[y/part_scale%part_height][x/part_scale%part_width];
 }
 
 static void DrawFull(Canvas *canvas){
   for(int x = 0; x < WIDTH*32; x++) {
     for(int y = 0; y < HEIGHT*32; y++) {
-      if(inImage(x, y)){
-        canvas->SetPixel(x, y, 1, 1, 1);
-      } else {
+      if(x < part_x or x > part_x + part_scale*part_width
+      or y < part_y or y > part_y + part_scale*part_height){
         canvas->SetPixel(x, y, leds[x][y][0], leds[x][y][1], leds[x][y][2]);
+      } else {
+        if(inImage(x-part_x, y-part_y)){
+          canvas->SetPixel(x, y, 255, 255, 255);
+        } else {
+          canvas->SetPixel(x, y,   0,   0,   0);
+        }
       }
       leds[x][y][0] *= DECAY;
       leds[x][y][1] *= DECAY;
