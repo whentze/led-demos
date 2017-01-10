@@ -140,10 +140,10 @@ void DrawOnCanvas(Canvas *canvas) {
   }
 }
 
-void handleKeyboard(void) {
+void handleKeyboard(FILE *fd) {
   while(1){
     puts("keyboard\n");
-    switch(getchar()){
+    switch(getc(fd)){
       case '-':
         SPOKES = max(1, SPOKES - 1);
         puts("foo\n");
@@ -185,7 +185,7 @@ int main(int argc, char *argv[]) {
 
   initcolors();
   thread drawer(DrawOnCanvas, canvas);    // Using the canvas.
-  thread keyboardHandler(handleKeyboard);
+  thread keyboardHandler(handleKeyboard, stdin);
 
   drawer.join();
   // Animation finished. Shut down the RGB matrix.
