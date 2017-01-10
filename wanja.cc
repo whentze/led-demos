@@ -59,10 +59,6 @@ static void DrawOnCanvas(Canvas *canvas) {
       int x = max(0, min(WIDTH*32  - 1, int(fx)));
       int y = max(0, min(HEIGHT*32 - 1, int(fy)));
 
-      //leds[x][y][0] = std::min(255, leds[x][y][0] + r);
-      //leds[x][y][1] = std::min(255, leds[x][y][1] + g);
-      //leds[x][y][2] = std::min(255, leds[x][y][2] + b);
-
       //gamma correction
       leds[x][y][0] = (int)std::min(255.0, sqrt(leds[x][y][0]*leds[x][y][0] + r*r));
       leds[x][y][1] = (int)std::min(255.0, sqrt(leds[x][y][1]*leds[x][y][1] + g*g));
