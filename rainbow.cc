@@ -63,7 +63,7 @@ static void DrawFull(Canvas *canvas){
   for(int x = 0; x < WIDTH*32; x++) {
     for(int y = 0; y < HEIGHT*32; y++) {
       canvas->SetPixel(x, y, leds[x][y][0], leds[x][y][1], leds[x][y][2]);
-      if(image_partial[y%part_height][x%part_width]){
+      if(image_partial[y/4%part_height][x/4%part_width]){
         leds[x][y][0] *= DECAY;
         leds[x][y][1] *= DECAY;
         leds[x][y][2] *= DECAY;
