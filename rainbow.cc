@@ -48,8 +48,8 @@ void initcolors();
 
 const unsigned part_width = 5;
 const unsigned part_height= 4;
-const unsigned part_x = 158;
-const unsigned part_y = 4;
+unsigned part_x = 158;
+unsigned part_y = 4;
 const unsigned part_scale = 6;
 
 bool image_partial[part_height][part_width] = {
@@ -95,6 +95,7 @@ void DrawOnCanvas(Canvas *canvas) {
     gshift = fmod(gshift + GSPEED, 2*M_PI);
     pulse = (pulse + 1) % PULSELEN;
     initcolors();
+    part_x = (unsigned)(80+76*sin(gturn));
     for(int i = 0; i < NUM; i++) {
       star* s = &(stars[i]);
       if(!s->held) {
